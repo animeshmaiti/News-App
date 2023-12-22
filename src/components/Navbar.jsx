@@ -4,7 +4,7 @@ export class Navbar extends Component {
   render() {
     const navStyle = this.props.myTheme;
     const toggleBtn = this.props.toggleStyle;
-    console.log(navStyle);
+    // console.log(navStyle);
     return (
       <div>
         <nav

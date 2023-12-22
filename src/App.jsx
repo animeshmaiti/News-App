@@ -17,6 +17,7 @@ export default class App extends Component {
     document.body.style.backgroundColor = "#212529";
     document.body.style.color = "white";
   }
+  apiKey=process.env.REACT_APP_NEWS_API_KEY;
   render() {
     const toggleStyle = () => {
       // const svgElements = document.querySelectorAll('svg'); // Select all SVG elements
@@ -60,7 +61,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar myTheme={this.state} toggleStyle={toggleStyle} />
-        <News myTheme={this.state} />
+        <News apiKey={this.apiKey} myTheme={this.state} />
       </div>
     );
   }
