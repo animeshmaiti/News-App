@@ -9,7 +9,7 @@ export class NewsItem extends Component {
     let newsUrl = this.props.newsUrl;
     // console.log(cardStyle);
     return (
-        <div className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style} mb-3`} style={{width:"90%"}}>
+        <div className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style} mb-3`} style={{width:"95%"}}>
           <div className="row g-0">
             <div className="col-md-4">
               <img src={imgUrl} className="img-fluid rounded-start" alt="..." />

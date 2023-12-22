@@ -25,7 +25,7 @@ export class News extends Component {
         <div className="container">
           <h1>Top Stories</h1>
           <div className="d-flex">
-            <div style={{ width: "70%" }}>
+            <div style={{ width: "80%" }}>
               {this.state.articles.map((element) => {
                 return (
                   <NewsItem
@@ -40,7 +40,7 @@ export class News extends Component {
               })}
             </div>
 
-            <div style={{ width: "30%" }}>
+            <div style={{ width: "20%" }}>
               <NewsItem2
                 myTheme={itemStyle}
                 title="my title"

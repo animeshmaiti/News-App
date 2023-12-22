@@ -4,7 +4,7 @@ export class NewsItem2 extends Component {
   render() {
     const cardStyle = this.props.myTheme;
     return (
-        <div className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style}`} style={{width: "90%"}}>
+        <div className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style}`} style={{width: "100%"}}>
           <img src="..." className="card-img-top" alt="..." />
           <div className="card-body">
             <p className="card-text">
