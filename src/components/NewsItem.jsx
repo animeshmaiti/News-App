@@ -11,7 +11,7 @@ export class NewsItem extends Component {
     return (
         <div className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style} mb-3`} style={{width:"90%"}}>
           <div className="row g-0">
-            <div className="col-md-4 img-style">
+            <div className="col-md-4">
               <img src={imgUrl} className="img-fluid rounded-start" alt="..." />
             </div>
             <div className="col-md-8 ">
