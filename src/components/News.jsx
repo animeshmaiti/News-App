@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import NewsItem2 from "./NewsItem2";
-import noImage from "../no-image (Custom).png";
+import noImage from "../no-image.png";
 
 export class News extends Component {
   constructor() {

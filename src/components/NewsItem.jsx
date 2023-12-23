@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import noImage from "../no-image (Custom).png";
+import noImage from "../no-image.png";
 
 export class NewsItem extends Component {
   render() {
