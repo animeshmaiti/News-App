@@ -8,18 +8,40 @@ export class News extends Component {
     super();
     this.state = {
       articles: [],
+      page: 1,
     };
   }
   async componentDidMount() {
-    let url =
-      `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.apiKey}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=10`;
     let data = await fetch(url);
     let parseData = await data.json();
-    this.setState({ articles: parseData.articles });
+    this.setState({
+      articles: parseData.articles,
+      page: this.state.page,
+      totalResults: parseData.totalResults,
+    });
   }
+  handlePrev = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${
+      this.props.apiKey
+    }&page=${this.state.page - 1}&pagesize=10`;
+    let data = await fetch(url);
+    let parseData = await data.json();
+    this.setState({ articles: parseData.articles, page: this.state.page - 1 });
+  };
+  handleNext = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${
+      this.props.apiKey
+    }&page=${this.state.page + 1}&pagesize=10`;
+    let data = await fetch(url);
+    let parseData = await data.json();
+    this.setState({
+      articles: parseData.articles,
+      page: this.state.page + 1,
+    });
+  };
   render() {
     const itemStyle = this.props.myTheme;
-    // console.log(itemStyle);
     return (
       <>
         <div className="container">
@@ -38,6 +60,27 @@ export class News extends Component {
                   />
                 );
               })}
+              <div className="container d-flex justify-content-between">
+                <button
+                  disabled={this.state.page <= 1}
+                  type="button"
+                  className={`btn btn-${itemStyle.btn_style}`}
+                  onClick={this.handlePrev}
+                >
+                  &larr; Previous
+                </button>
+                <button
+                  disabled={
+                    this.state.page + 1 >
+                    Math.ceil(this.state.totalResults / 10)
+                  }
+                  type="button"
+                  className={`btn btn-${itemStyle.btn_style}`}
+                  onClick={this.handleNext}
+                >
+                  Next &rarr;
+                </button>
+              </div>
             </div>
 
             <div style={{ width: "20%" }}>
