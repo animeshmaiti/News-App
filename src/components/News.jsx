@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import NewsItem2 from "./NewsItem2";
 import noImage from "../no-image.png";
+import Spinner from "./Spinner";
 
 export class News extends Component {
   constructor() {
@@ -9,35 +10,45 @@ export class News extends Component {
     this.state = {
       articles: [],
       page: 1,
+      loading:false,
     };
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=10`;
+    this.setState({loading:true});
+    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     this.setState({
       articles: parseData.articles,
       page: this.state.page,
       totalResults: parseData.totalResults,
+      loading:false
     });
   }
   handlePrev = async () => {
+    this.setState({loading:true});
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${
       this.props.apiKey
-    }&page=${this.state.page - 1}&pagesize=10`;
+    }&page=${this.state.page - 1}&pagesize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
-    this.setState({ articles: parseData.articles, page: this.state.page - 1 });
+    this.setState({
+       articles: parseData.articles,
+       page: this.state.page - 1,
+       loading:false
+      });
   };
   handleNext = async () => {
+    this.setState({loading:true});
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${
       this.props.apiKey
-    }&page=${this.state.page + 1}&pagesize=10`;
+    }&page=${this.state.page + 1}&pagesize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     this.setState({
       articles: parseData.articles,
       page: this.state.page + 1,
+      loading: false
     });
   };
   render() {
@@ -46,9 +57,10 @@ export class News extends Component {
       <>
         <div className="container">
           <h1>Top Stories</h1>
+          {this.state.loading && <Spinner/>}
           <div className="d-flex">
             <div style={{ width: "80%" }}>
-              {this.state.articles.map((element) => {
+              {!this.state.loading && this.state.articles.map((element) => {
                 return (
                   <NewsItem
                     key={element.url}

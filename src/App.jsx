@@ -22,7 +22,6 @@ export default class App extends Component {
   apiKey=process.env.REACT_APP_NEWS_API_KEY;
   render() {
     const toggleStyle = () => {
-      // const svgElements = document.querySelectorAll('svg'); // Select all SVG elements
       if (this.state.color === "white") {
         this.setState(//async
           {
@@ -37,10 +36,6 @@ export default class App extends Component {
             document.body.style.color = this.state.color;
           }
         );
-        // showAlert("success", "Light mode is enabled");
-        // svgElements.forEach((svg) => {
-        //   svg.style.fill = '#212529'; // Change the fill color
-        // });
       } else {
         this.setState(
           {
@@ -56,16 +51,12 @@ export default class App extends Component {
             document.body.style.color = this.state.color;
           }
         );
-        // showAlert("success", "Dark mode is enabled");
-        // svgElements.forEach((svg) => {
-        //   svg.style.fill = 'rgba(222, 226, 230, 0.75)'; // Change the fill color
-        // });
       }
     };
     return (
       <div>
         <Navbar myTheme={this.state} toggleStyle={toggleStyle} />
-        <News apiKey={this.apiKey} myTheme={this.state} />
+        <News apiKey={this.apiKey} myTheme={this.state} pageSize={10}/>
         <Footer myTheme={this.state}/>
       </div>
     );
