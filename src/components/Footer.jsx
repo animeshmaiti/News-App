@@ -31,7 +31,7 @@ export class Footer extends Component {
   
             <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
               <li className="ms-3">
-                <a className="text-body-secondary" href="https://github.com/animeshmaiti/textUtils" target="_blank" rel="noopener noreferrer">
+                <a className="text-body-secondary" href="https://github.com/animeshmaiti/News-App" target="_blank" rel="noopener noreferrer">
                   <svg className="bi" width="24" height="24" fill={this.props.myTheme.svg_style}>
                     <use xlinkHref="#gitHub"/>
                   </svg>

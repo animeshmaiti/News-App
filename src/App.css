@@ -3,3 +3,17 @@
   height: 100%;
   width: 2px;
 }
+.show-case{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  min-height: 100vh;
+}
+.card-img-top{
+  max-height: 161px;
+  max-width: fit-content;
+}
+.img-fluid{
+  max-height: 200px;
+}
