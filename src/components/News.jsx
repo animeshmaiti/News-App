@@ -27,6 +27,7 @@ export class News extends Component {
       loading: false,
       pageSize: this.props.pageSize,
     };
+    document.title=`${this.capFirstLetter(this.props.category)} - News`;
   }
   async updateNews(){
     this.setState({ loading: true });
@@ -51,12 +52,15 @@ export class News extends Component {
     this.setState({page: this.state.page + 1});
     this.updateNews();
   };
+  capFirstLetter = (string)=>{
+    return string.charAt(0).toUpperCase()+string.slice(1)
+  }
   render() {
     const btn_style = this.props.myTheme;
     return (
       <>
         <div className="container">
-          <h1>{this.props.heading}</h1>
+          <h1 className="m-4">{`Top ${this.capFirstLetter(this.props.category)} Headlines`}</h1>
           {this.state.loading && <Spinner />}
           <div className="d-flex">
             <div className="min-vh-100" style={{ width: "100%" }}>

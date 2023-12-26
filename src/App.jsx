@@ -64,16 +64,16 @@ export default class App extends Component {
         <Router>
           <Navbar myTheme={this.state} toggleStyle={toggleStyle} />
           <Routes>
-            <Route exact path="/" element={<News key={"home"} myTheme={this.state.btn_style} heading={"Top Stories"} endpoints={"top-headlines"} country={"in"} category={""} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/newsShowCase" element={<NewsShowCase key={"esports"} myTheme={this.state.btn_style} heading={"News ShowCase"} endpoints={"everything"} query={"esports"} apiKey={this.apiKey} pageSize={20} />} />
-            <Route exact path="/business" element={<News key={"business"} myTheme={this.state.btn_style} heading={"Business"} endpoints={"top-headlines"} category={"business"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/tech" element={<News key={"technology"} myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"technology"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/sports" element={<News key={"sports"} myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"sports"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/entertainment" element={<News key={"entertainment"} myTheme={this.state.btn_style} endpoints={"top-headlines"}  category={"entertainment"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/health" element={<News key={"health"} myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"health"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/science" element={<News key={"science"} myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"science"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/gaming" element={<News key={"gaming"} myTheme={this.state.btn_style} endpoints={"everything"} query={"gaming"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/about" element={<About myTheme={this.state.btn_style}/>}/>
+            <Route exact path="/" element={<News key="home" myTheme={this.state.btn_style} heading={"Top Stories"} endpoints={"top-headlines"} country={"in"} category={""} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/newsShowCase" element={<NewsShowCase key="esports" myTheme={this.state.btn_style} heading={"News ShowCase"} endpoints={"everything"} query={"esports"} apiKey={this.apiKey} pageSize={20} />} />
+            <Route exact path="/business" element={<News key="business" myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"business"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/tech" element={<News key="technology" myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"technology"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/sports" element={<News key="sports" myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"sports"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/entertainment" element={<News key="entertainment" myTheme={this.state.btn_style} endpoints={"top-headlines"}  category={"entertainment"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/health" element={<News key="health" myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"health"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/science" element={<News key="science" myTheme={this.state.btn_style} endpoints={"top-headlines"} category={"science"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/gaming" element={<News key="gaming" myTheme={this.state.btn_style} endpoints={"everything"} query={"gaming"} apiKey={this.apiKey} pageSize={10} />}/>
+            <Route exact path="/about" element={<About/>}/>
           </Routes>
           <Footer myTheme={this.state} />
         </Router>
