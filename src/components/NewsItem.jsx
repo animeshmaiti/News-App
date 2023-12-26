@@ -3,16 +3,19 @@ import noImage from "../no-image.png";
 
 export class NewsItem extends Component {
   render() {
-    let cardStyle = this.props.myTheme;
     let title = this.props.title;
     let description = this.props.desc;
     let imgUrl = this.props.imgUrl;
     let newsUrl = this.props.newsUrl;
+    let author=this.props.author;
+    let date = this.props.date;
+    let source = this.props.source;
     return (
       <div
-        className={`card text-bg-${cardStyle.nav_style} border-${cardStyle.border_style} mb-3`}
+        className={`card mb-3`}
         style={{ width: "95%" }}
       >
+        <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{zIndex:'1',left:'98%'}}>{source}</span>
         <div className="row g-0">
           <div className="col-md-4 d-flex justify-content-center">
             <img
@@ -35,6 +38,7 @@ export class NewsItem extends Component {
                   full news
                 </a>
               </p>
+              <p className="card-text"><small className="text-body-secondary">By {author} on {date}</small></p>
             </div>
           </div>
         </div>

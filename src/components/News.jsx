@@ -28,10 +28,9 @@ export class News extends Component {
       pageSize: this.props.pageSize,
     };
   }
-  async componentDidMount() {
+  async updateNews(){
     this.setState({ loading: true });
-    // let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.state.pageSize}`;
-    let url = `https://newsapi.org/v2/${this.props.endpoints}?country=${this.props.country}&language=en&category=${this.props.category}&q=${this.props.query}&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.state.pageSize}`;
+    const url = `https://newsapi.org/v2/${this.props.endpoints}?country=${this.props.country}&language=en&category=${this.props.category}&q=${this.props.query}&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.state.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     this.setState({
@@ -41,58 +40,37 @@ export class News extends Component {
       loading: false,
     });
   }
+  async componentDidMount() {
+    this.updateNews();
+  }
   handlePrev = async () => {
-    this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/${this.props.endpoints}?country=${
-      this.props.country
-    }&language=en&category=${this.props.category}&q=${
-      this.props.query
-    }&apiKey=${this.props.apiKey}&page=${this.state.page - 1}&pagesize=${
-      this.state.pageSize
-    }`;
-    let data = await fetch(url);
-    let parseData = await data.json();
-    this.setState({
-      articles: parseData.articles,
-      page: this.state.page - 1,
-      loading: false,
-    });
+    this.setState({page: this.state.page - 1});
+    this.updateNews();
   };
   handleNext = async () => {
-    this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/${this.props.endpoints}?country=${
-      this.props.country
-    }&language=en&category=${this.props.category}&q=${
-      this.props.query
-    }&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pagesize=${
-      this.state.pageSize
-    }`;
-    let data = await fetch(url);
-    let parseData = await data.json();
-    this.setState({
-      articles: parseData.articles,
-      page: this.state.page + 1,
-      loading: false,
-    });
+    this.setState({page: this.state.page + 1});
+    this.updateNews();
   };
   render() {
-    const itemStyle = this.props.myTheme;
+    const btn_style = this.props.myTheme;
     return (
       <>
         <div className="container">
           <h1>{this.props.heading}</h1>
           {this.state.loading && <Spinner />}
           <div className="d-flex">
-            <div style={{ width: "100%" }}>
+            <div className="min-vh-100" style={{ width: "100%" }}>
               {!this.state.loading &&
                 this.state.articles.map((element) => {
                   return (
                     <NewsItem
                       key={element.url}
-                      myTheme={itemStyle}
+                      source={element.source.name}
+                      author={element.author}
                       title={element.title ? element.title : ""}
                       desc={element.description ? element.description : ""}
                       imgUrl={element.urlToImage ? element.urlToImage : noImage}
+                      date={element.publishedAt}
                       newsUrl={element.url}
                     />
                   );
@@ -101,7 +79,7 @@ export class News extends Component {
                 <button
                   disabled={this.state.page <= 1}
                   type="button"
-                  className={`btn btn-${itemStyle.btn_style}`}
+                  className={`btn btn-${btn_style}`}
                   onClick={this.handlePrev}
                 >
                   &larr; Previous
@@ -112,7 +90,7 @@ export class News extends Component {
                     Math.ceil(this.state.totalResults / this.state.pageSize)
                   }
                   type="button"
-                  className={`btn btn-${itemStyle.btn_style}`}
+                  className={`btn btn-${btn_style}`}
                   onClick={this.handleNext}
                 >
                   Next &rarr;
