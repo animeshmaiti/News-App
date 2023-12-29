@@ -54,17 +54,49 @@ export class News extends Component {
   //   this.setState({ page: this.state.page + 1 });
   //   this.updateNews();
   // };
+  // fetchMoreData = async () => {
+  //   const nextPage = this.state.page+1
+  //   console.log(this.state.page)
+  //   const url = `https://newsapi.org/v2/${this.props.endpoints}?country=${this.props.country}&language=en&category=${this.props.category}&q=${this.props.query}&apiKey=${this.props.apiKey}&page=${nextPage}&pagesize=${this.state.pageSize}`;
+  //   let data = await fetch(url);
+  //   let parseData = await data.json();
+  //   this.setState((prevState) => ({
+  //     articles: [...prevState.articles, ...parseData.articles],
+  //     page: nextPage,
+  //     totalResults: parseData.totalResults,
+  //   }));
+  // };
   fetchMoreData = async () => {
-    const nextPage = this.state.page+1
-    console.log(this.state.page)
+    const nextPage = this.state.page + 1;
     const url = `https://newsapi.org/v2/${this.props.endpoints}?country=${this.props.country}&language=en&category=${this.props.category}&q=${this.props.query}&apiKey=${this.props.apiKey}&page=${nextPage}&pagesize=${this.state.pageSize}`;
-    let data = await fetch(url);
-    let parseData = await data.json();
-    this.setState((prevState) => ({
-      articles: [...prevState.articles, ...parseData.articles],
-      page: nextPage,
-      totalResults: parseData.totalResults,
-    }));
+
+    try {
+      let data = await fetch(url);
+      let parseData = await data.json();
+
+      if (parseData.articles && Array.isArray(parseData.articles)) {
+        const newArticles = parseData.articles;
+        const totalResults = parseData.totalResults;
+
+        // Check if there are more results to fetch
+        if (this.state.articles.length < totalResults) {
+          this.setState((prevState) => ({
+            articles: [...prevState.articles, ...newArticles],
+            page: nextPage,
+            totalResults: totalResults,
+          }));
+        } else {
+          console.log("No more results to fetch.");
+        }
+      } else {
+        console.error(
+          "Invalid or missing 'articles' property in API response:",
+          parseData
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching more data:", error);
+    }
   };
 
   capFirstLetter = (string) => {
@@ -72,8 +104,8 @@ export class News extends Component {
   };
   render() {
     // const btn_style = this.props.myTheme;
-    console.log(this.state.articles.length)
-    console.log(this.state.totalResults)
+    console.log(this.state.articles.length);
+    console.log(this.state.totalResults);
     return (
       <>
         <div className="container">
@@ -86,25 +118,26 @@ export class News extends Component {
               <InfiniteScroll
                 dataLength={this.state.articles.length}
                 next={this.fetchMoreData}
-                hasMore={this.state.articles.length !== this.state.totalResults}
-                loader={<Spinner/>}
+                hasMore={
+                  this.state.articles.length !== this.state.totalResults &&
+                  this.state.articles.length < 100
+                }
+                loader={<Spinner />}
               >
                 {this.state.articles.map((element) => {
-                    return (
-                      <NewsItem
-                        key={element.url}
-                        source={element.source.name}
-                        author={element.author}
-                        title={element.title ? element.title : ""}
-                        desc={element.description ? element.description : ""}
-                        imgUrl={
-                          element.urlToImage ? element.urlToImage : noImage
-                        }
-                        date={element.publishedAt}
-                        newsUrl={element.url}
-                      />
-                    );
-                  })}
+                  return (
+                    <NewsItem
+                      key={element.url}
+                      source={element.source.name}
+                      author={element.author}
+                      title={element.title ? element.title : ""}
+                      desc={element.description ? element.description : ""}
+                      imgUrl={element.urlToImage ? element.urlToImage : noImage}
+                      date={element.publishedAt}
+                      newsUrl={element.url}
+                    />
+                  );
+                })}
               </InfiniteScroll>
             </div>
           </div>
