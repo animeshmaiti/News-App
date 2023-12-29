@@ -17,3 +17,6 @@
 .img-fluid{
   max-height: 200px;
 }
+.infinite-scroll-component{
+  overflow: visible!important;
+}
