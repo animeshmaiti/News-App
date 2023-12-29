@@ -11,16 +11,17 @@ export class NewsShowCase extends Component {
       page: 1,
       loading: false,
       pageSize: this.props.pageSize,
+      totalResults:0
     };
   }
-  async updateNews(){
+  async updateNews(fetchPage = this.state.page) {
     this.setState({ loading: true });
-    const url = `https://newsapi.org/v2/${this.props.endpoints}?q=${this.props.query}&language=en&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.state.pageSize}`;
+    const url = `https://newsapi.org/v2/${this.props.endpoints}?q=${this.props.query}&language=en&apiKey=${this.props.apiKey}&page=${fetchPage}&pagesize=${this.state.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     this.setState({
       articles: parseData.articles,
-      page: this.state.page,
+      page: fetchPage,
       totalResults: parseData.totalResults,
       loading: false,
     });
@@ -29,12 +30,18 @@ export class NewsShowCase extends Component {
     this.updateNews();
   }
   handlePrev = async () => {
-    this.setState({page: this.state.page - 1});
-    this.updateNews();
+    let nextPage = this.state.page - 1;
+    this.updateNews(nextPage);
   };
   handleNext = async () => {
-    this.setState({page: this.state.page + 1});
-    this.updateNews();
+    let prevPage = this.state.page + 1;
+    const totalResults = this.state.totalResults;
+    if (this.state.articles.length < totalResults){
+      this.updateNews(prevPage);
+    } else{
+      console.log("No more results to fetch.");
+    }
+    
   };
 
   render() {
