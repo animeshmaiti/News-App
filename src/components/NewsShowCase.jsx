@@ -16,6 +16,7 @@ export class NewsShowCase extends Component {
   }
   async updateNews(fetchPage = this.state.page) {
     this.setState({ loading: true });
+    this.props.setProgress(10);
     const url = `https://newsapi.org/v2/${this.props.endpoints}?q=${this.props.query}&language=en&apiKey=${this.props.apiKey}&page=${fetchPage}&pagesize=${this.state.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
@@ -25,6 +26,7 @@ export class NewsShowCase extends Component {
       totalResults: parseData.totalResults,
       loading: false,
     });
+    this.props.setProgress(100);
   }
   async componentDidMount() {
     this.updateNews();

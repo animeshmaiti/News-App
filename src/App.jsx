@@ -6,11 +6,13 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NewsShowCase from "./components/NewsShowCase";
 import About from "./components/About";
+import LoadingBar from "react-top-loading-bar";
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
+      progress: 0,
       color: "white",
       backgroundColor: "#212529",
       btnText: "Dark Mode",
@@ -20,10 +22,16 @@ export default class App extends Component {
     };
     document.body.style.backgroundColor = "#212529";
     document.body.style.color = "white";
-    document.documentElement.setAttribute('data-bs-theme', 'dark')
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
   apiKey = process.env.REACT_APP_NEWS_API_KEY;
+  // setProgress = (progress) => {
+  //   this.setState({ progress: progress });
+  // };
   render() {
+    const setProgress = (progress) => {
+      this.setState({ progress: progress });
+    };
     const toggleStyle = () => {
       if (this.state.color === "white") {
         this.setState(
@@ -38,7 +46,7 @@ export default class App extends Component {
           () => {
             document.body.style.backgroundColor = this.state.backgroundColor;
             document.body.style.color = this.state.color;
-            document.documentElement.setAttribute('data-bs-theme', 'light')
+            document.documentElement.setAttribute("data-bs-theme", "light");
           }
         );
       } else {
@@ -54,7 +62,7 @@ export default class App extends Component {
           () => {
             document.body.style.backgroundColor = this.state.backgroundColor;
             document.body.style.color = this.state.color;
-            document.documentElement.setAttribute('data-bs-theme', 'dark')
+            document.documentElement.setAttribute("data-bs-theme", "dark");
           }
         );
       }
@@ -62,18 +70,140 @@ export default class App extends Component {
     return (
       <>
         <Router>
+          <LoadingBar color="#f11946" progress={this.state.progress} />
           <Navbar myTheme={this.state} toggleStyle={toggleStyle} />
           <Routes>
-            <Route exact path="/" element={<News key="home" heading={"Top Stories"} endpoints={"top-headlines"} country={"in"} category={""} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/newsShowCase" element={<NewsShowCase key="esports" myTheme={this.state.btn_style} heading={"News ShowCase"} endpoints={"everything"} query={"esports"} apiKey={this.apiKey} pageSize={20} />} />
-            <Route exact path="/business" element={<News key="business" endpoints={"top-headlines"} category={"business"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/tech" element={<News key="technology" endpoints={"top-headlines"} category={"technology"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/sports" element={<News key="sports" endpoints={"top-headlines"} category={"sports"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/entertainment" element={<News key="entertainment" endpoints={"top-headlines"}  category={"entertainment"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/health" element={<News key="health" endpoints={"top-headlines"} category={"health"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/science" element={<News key="science" endpoints={"top-headlines"} category={"science"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/gaming" element={<News key="gaming" endpoints={"everything"} query={"gaming"} apiKey={this.apiKey} pageSize={10} />}/>
-            <Route exact path="/about" element={<About/>}/>
+            <Route
+              exact
+              path="/"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="home"
+                  heading={"Top Stories"}
+                  endpoints={"top-headlines"}
+                  country={"in"}
+                  category={""}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/newsShowCase"
+              element={
+                <NewsShowCase
+                  setProgress={setProgress}  
+                  key="esports"
+                  myTheme={this.state.btn_style}
+                  heading={"News ShowCase"}
+                  endpoints={"everything"}
+                  query={"esports"}
+                  apiKey={this.apiKey}
+                  pageSize={20}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/business"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="business"
+                  endpoints={"top-headlines"}
+                  category={"business"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/tech"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="technology"
+                  endpoints={"top-headlines"}
+                  category={"technology"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/sports"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="sports"
+                  endpoints={"top-headlines"}
+                  category={"sports"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/entertainment"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="entertainment"
+                  endpoints={"top-headlines"}
+                  category={"entertainment"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/health"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="health"
+                  endpoints={"top-headlines"}
+                  category={"health"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/science"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="science"
+                  endpoints={"top-headlines"}
+                  category={"science"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/gaming"
+              element={
+                <News
+                  setProgress={setProgress}  
+                  key="gaming"
+                  endpoints={"everything"}
+                  query={"gaming"}
+                  apiKey={this.apiKey}
+                  pageSize={10}
+                />
+              }
+            />
+            <Route exact path="/about" element={<About />} />
           </Routes>
           <Footer myTheme={this.state} />
         </Router>

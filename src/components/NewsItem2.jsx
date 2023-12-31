@@ -11,8 +11,10 @@ export class NewsItem2 extends Component {
     let date = this.props.date;
     let source = this.props.source;
     return (
-      <div className={`card my-4`} style={{ width: "18rem" }}>
-        <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{zIndex:'1',left:'98%'}}>{source}</span>
+      <div className={`card mx-2 my-4`} style={{ width: "18rem" }}>
+        <div>
+          <span className="source badge rounded-pill bg-danger">{source}</span>
+        </div>
         <div className="d-flex justify-content-center">
           <img
             src={imgUrl}
@@ -35,7 +37,8 @@ export class NewsItem2 extends Component {
           </p>
           <p className="card-text">
             <small className="text-body-secondary">
-              By {!author ? "Unknown" : author} on {new Date(date).toTimeString()}
+              By {!author ? "Unknown" : author} on{" "}
+              {new Date(date).toTimeString()}
             </small>
           </p>
         </div>
