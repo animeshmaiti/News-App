@@ -1,3 +1,6 @@
+https://newsapi.org/v2/top-headlines?country=in&language=en&category=&q=&apiKey=${props.apiKey}&page=1&pagesize=10
+https://newsapi.org/v2/everything?country=in&language=en&category=&q=esports&apiKey=${props.apiKey}&page=1&pagesize=10
+
 import React, { useState,useEffect} from "react";
 import NewsItem from "./NewsItem";
 import noImage from "../no-image.png";
