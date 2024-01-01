@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-export class Navbar extends Component {
-  render() {
-    const navStyle = this.props.myTheme;
-    const toggleBtn = this.props.toggleStyle;
+function Navbar(props) {
+    const navStyle = props.myTheme;
+    const toggleBtn = props.toggleStyle;
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -100,6 +99,5 @@ export class Navbar extends Component {
         </nav>
       </div>
     );
-  }
 }
 export default Navbar;
