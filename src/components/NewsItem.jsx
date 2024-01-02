@@ -38,7 +38,7 @@ function NewsItem(props) {
             </p>
             <p className="card-text">
               <small className="text-body-secondary">
-                By {author} on {date}
+                By {author} on {new Date(date).toTimeString()}
               </small>
             </p>
           </div>
