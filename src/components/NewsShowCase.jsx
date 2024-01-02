@@ -49,7 +49,7 @@ function NewsShowCase(props) {
   const btn_style = props.myTheme;
   return (
     <>
-      <div className="container">
+      <div className="container" style={{marginTop:"4.5rem"}}>
         <h1>{props.heading}</h1>
         {showCaseComp.loading && <Spinner />}
         <div className="show-case">

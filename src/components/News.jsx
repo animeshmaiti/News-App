@@ -77,7 +77,7 @@ function News(props) {
     console.log(newsComp.totalResults);
     return (
       <>
-        <div className="container">
+        <div className="container" style={{marginTop:"4.5rem"}}>
           <h1 className="m-4">{`Top ${capFirstLetter(
             props.category
           )} Headlines`}</h1>
