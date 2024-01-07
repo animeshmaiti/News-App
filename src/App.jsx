@@ -1,5 +1,5 @@
 import "./App.css";
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 import Footer from "./components/Footer";
@@ -21,10 +21,10 @@ export default function App() {
   });
 
   useEffect(() => {
-    document.body.style.backgroundColor = "#212529";
-    document.body.style.color = "white";
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }, []);
+    document.body.style.backgroundColor = myStyle.color === 'white' ? '#212529' : 'white';
+    document.body.style.color = myStyle.color === 'white' ? 'white' : '#212529';
+    document.documentElement.setAttribute("data-bs-theme", myStyle.color === 'white'? 'dark':'light');
+  }, [myStyle.color]);
 
   // setProgress = (progress) => {
   //   setState({ progress: progress });
@@ -42,29 +42,16 @@ export default function App() {
           btnText: "Light Mode",
           btn_style: "dark",
           svg_style: "rgba(67, 68, 68, 0.75)",
-        },
-        () => {
-          document.body.style.backgroundColor = myStyle.backgroundColor;
-          document.body.style.color = myStyle.color;
-          document.documentElement.setAttribute("data-bs-theme", "light");
-        }
-      );
+        });
     } else {
-      setMyStyle(
-        {
-          color: "white",
-          backgroundColor: "#212529",
-          btnText: "Dark Mode",
-          nav_bg: "navbar navbar-expand-lg bg-dark",
-          btn_style: "light",
-          svg_style: "rgba(222, 226, 230, 0.75)",
-        },
-        () => {
-          document.body.style.backgroundColor = myStyle.backgroundColor;
-          document.body.style.color = myStyle.color;
-          document.documentElement.setAttribute("data-bs-theme", "dark");
-        }
-      );
+      setMyStyle({
+        color: "white",
+        backgroundColor: "#212529",
+        btnText: "Dark Mode",
+        nav_bg: "navbar navbar-expand-lg bg-dark",
+        btn_style: "light",
+        svg_style: "rgba(222, 226, 230, 0.75)",
+      });
     }
   };
   return (
